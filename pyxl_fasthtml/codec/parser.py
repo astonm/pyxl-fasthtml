@@ -2,7 +2,6 @@
 
 import tokenize
 from pyxl_fasthtml.utils import escape
-from pyxl_fasthtml import html
 from .html_tokenizer import (
     HTMLTokenizer,
     ParseError as TokenizerParseError,
@@ -240,34 +239,19 @@ class PyxlFasthtmlParser(HTMLTokenizer):
         )
 
         module, dot, identifier = tag.rpartition(".")
-        identifier = "x_%s" % identifier
+        identifier = tagname_to_tagclass(identifier)
         x_tag = module + dot + identifier
 
-        if hasattr(html, x_tag):
-            self.output.append("html.")
         self.output.append("%s(" % x_tag)
 
-        first_attr = True
-        for attr_name, attr_value in attrs.items():
-            if first_attr:
-                first_attr = False
-            else:
-                self.output.append(", ")
-
-            self.output.append(self.safe_attr_name(attr_name))
-            self.output.append("=")
-            self._handle_attr_value(attr_value)
-
-        self.output.append(")")
-        if call:
-            # start call to __call__
-            self.output.append("(")
+        # XXX TODO XXX REMOVE???
+        # self.output.append(")")
+        # if call:
+        #     # start call to __call__
+        #     self.output.append(",")
         self.last_thing_was_python = False
 
     def handle_endtag(self, tag_name, call=True):
-        if call:
-            # finish call to __call__
-            self.output.append(")")
 
         assert self.open_tags, (
             "got </%s> but tag stack empty; parsing should be over!" % tag_name
@@ -279,6 +263,21 @@ class PyxlFasthtmlParser(HTMLTokenizer):
                 "<%s> on line %d closed by </%s> on line %d"
                 % (open_tag["tag"], open_tag["row"], tag_name, self.end[0])
             )
+
+        first_attr = True
+        for attr_name, attr_value in open_tag["attrs"].items():
+            if first_attr:
+                first_attr = False
+            else:
+                self.output.append(", ")
+
+            self.output.append(self.safe_attr_name(attr_name))
+            self.output.append("=")
+            self._handle_attr_value(attr_value)
+
+        if call:
+            # finish call to __call__
+            self.output.append(")")
 
         if len(self.open_tags):
             self.output.append(",")
@@ -297,8 +296,9 @@ class PyxlFasthtmlParser(HTMLTokenizer):
 
         self.start_element()
 
-        # XXX XXX mimics old pyxl_fasthtml, but this is gross and likely wrong. I'm pretty sure we actually
+        # XXX XXX mimics old pyxl, but this is gross and likely wrong. I'm pretty sure we actually
         # want %r instead of this crazy quote substitution and u"%s".
+        # TODO 9/7/2024 does this make sense at all now?
         data = data.replace('"', '\\"')
         if data != escape(data):
             self.output.append('html.rawhtml(u"%s"), ' % data)
@@ -331,3 +331,7 @@ def has_bare_generator(tokens):
         if tvalue == "for" and nesting == 0:
             return True
     return False
+
+
+def tagname_to_tagclass(tag_name):
+    return tag_name.capitalize()  # TODO 9/7/2024 CamelCase instead?

@@ -1,8 +1,8 @@
-# coding: pyxl
-from pyxl import html
+# coding: pyxl_fasthtml
+from pyxl_fasthtml import html
 
 def test():
-    # Presence of paretheses around html should not affect contents of tags. (In old pyxl,
+    # Presence of paretheses around html should not affect contents of tags. (In old pyxl_fasthtml,
     # this led to differences in whitespace handling.)
     assert str(get_frag1()) == str(get_frag2())
 

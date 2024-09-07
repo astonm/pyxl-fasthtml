@@ -1,5 +1,5 @@
-# coding: pyxl
-from pyxl import html
+# coding: pyxl_fasthtml
+from pyxl_fasthtml import html
 
 # This weird circumstance could cause extra spaces to get inserted...
 def a():

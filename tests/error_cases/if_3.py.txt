@@ -1,4 +1,4 @@
-# coding: pyxl
+# coding: pyxl_fasthtml
 
 a = (<frag>
          <if cond="{true}">foo</if>

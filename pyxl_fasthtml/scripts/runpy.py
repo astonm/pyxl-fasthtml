@@ -1,16 +1,16 @@
 #!/usr/bin/env python
 
 import sys
-import pyxl.codec.register
+import pyxl_fasthtml.codec.register
 
 
 _USAGE = """\
-Wraps a python command to allow it to recognize pyxl-coded files with
+Wraps a python command to allow it to recognize pyxl_fasthtml-coded files with
 no source modifications.
 
 Usage:
-    python -m pyxl.codec.register -m module.to.run [args...]
-    python -m pyxl.codec.register path/to/script.py [args...]
+    python -m pyxl_fasthtml.codec.register -m module.to.run [args...]
+    python -m pyxl_fasthtml.codec.register path/to/script.py [args...]
 """
 
 if __name__ == '__main__':

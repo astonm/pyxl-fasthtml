@@ -24,7 +24,7 @@ each time a new token is found.
 
 
 This file was taken from the python 2.7.4 library and modified for use by
-the Pyxl decoder. Changes made:
+the PyxlFasthtml decoder. Changes made:
     - When it encounters an unexpected EOF, the tokenizer does not raise an
       exception, and instead yields an errortoken if appropriate.
     - When it encounters an unexpected dedent, the tokenizer does not

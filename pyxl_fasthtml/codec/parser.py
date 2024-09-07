@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
 import tokenize
-from pyxl.utils import escape
-from pyxl import html
+from pyxl_fasthtml.utils import escape
+from pyxl_fasthtml import html
 from .html_tokenizer import (
         HTMLTokenizer,
         ParseError as TokenizerParseError,
@@ -17,9 +17,9 @@ class ParseError(Exception):
         else:
             super(ParseError, self).__init__(message)
 
-class PyxlParser(HTMLTokenizer):
+class PyxlFasthtmlParser(HTMLTokenizer):
     def __init__(self, row, col, str_function):
-        super(PyxlParser, self).__init__()
+        super(PyxlFasthtmlParser, self).__init__()
         self.start = self.end = (row, col)
         self.output = []
         self.open_tags = []
@@ -73,7 +73,7 @@ class PyxlParser(HTMLTokenizer):
 
         # interpret jumps on the same line as a single space
         elif tstart[1] > self.end[1]:
-            super(PyxlParser, self).feed(" ")
+            super(PyxlFasthtmlParser, self).feed(" ")
 
         self.end = tstart
 
@@ -85,7 +85,7 @@ class PyxlParser(HTMLTokenizer):
                 else:
                     self.end = (self.end[0], self.end[1]+1)
                 try:
-                    super(PyxlParser, self).feed(c)
+                    super(PyxlFasthtmlParser, self).feed(c)
                 except TokenizerParseError:
                     raise ParseError("HTML Parsing error", self.end)
         if self.done():
@@ -119,7 +119,7 @@ class PyxlParser(HTMLTokenizer):
                             State.ATTRIBUTE_VALUE_DOUBLE_QUOTED,
                             State.ATTRIBUTE_VALUE_SINGLE_QUOTED,
                             State.ATTRIBUTE_VALUE_UNQUOTED]:
-            super(PyxlParser, self).feed_python(tokens)
+            super(PyxlFasthtmlParser, self).feed_python(tokens)
         else:
             self.start_element()
 
@@ -335,7 +335,7 @@ class PyxlParser(HTMLTokenizer):
         self.start_element()
         self.handle_close_if()
 
-        # XXX XXX mimics old pyxl, but this is gross and likely wrong. I'm pretty sure we actually
+        # XXX XXX mimics old pyxl_fasthtml, but this is gross and likely wrong. I'm pretty sure we actually
         # want %r instead of this crazy quote substitution and u"%s".
         data = data.replace('"', '\\"')
         if data != escape(data):

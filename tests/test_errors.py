@@ -1,6 +1,6 @@
-from pyxl.codec.transform import pyxl_transform_string
-from pyxl.codec.tokenizer import PyxlParseError
-from pyxl.codec.parser import ParseError
+from pyxl_fasthtml.codec.transform import pyxl_fasthtml_transform_string
+from pyxl_fasthtml.codec.tokenizer import PyxlFasthtmlParseError
+from pyxl_fasthtml.codec.parser import ParseError
 
 import os
 
@@ -11,9 +11,9 @@ def _expect_failure(file_name):
     path = os.path.join(error_cases_path, file_name)
     try:
         with open(path, 'r') as f:
-            print(pyxl_transform_string(f.read()))
+            print(pyxl_fasthtml_transform_string(f.read()))
         assert False, "successfully decoded file %r" % file_name
-    except (PyxlParseError, ParseError):
+    except (PyxlFasthtmlParseError, ParseError):
         pass
 
 def test_error_cases():

@@ -1,2 +1,2 @@
-include README pyxl.pth finish_install.py
+include README.md pyxl_fasthtml.pth finish_install.py
 recursive-include emacs *.el

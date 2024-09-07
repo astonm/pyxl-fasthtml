@@ -1,7 +1,7 @@
 import datetime
 
-from pyxl.utils import escape
-from pyxl.base import x_base
+from pyxl_fasthtml.utils import escape
+from pyxl_fasthtml.base import x_base
 
 class x_rss_element(x_base):
     def _to_list(self, l):
@@ -78,7 +78,7 @@ class x_guid(x_rss_element):
     }
 
     def _handle_attribute(self, name, value):
-        # This is needed because pyxl doesn't support mixed case attribute names.
+        # This is needed because pyxl_fasthtml doesn't support mixed case attribute names.
         if name == 'is-perma-link':
             return ('isPermaLink', 'true' if value else 'false')
         else:

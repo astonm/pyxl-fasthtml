@@ -1,8 +1,8 @@
-" Pyxl syntax file
+" PyxlFasthtml syntax file
 "
 " This file is the unholy spawn of the standard python and html syntax files.
 "
-" Language:	Python with Pyxl support
+" Language:	Python with PyxlFasthtml support
 " Maintainer:	Josiah Boning <jboning@gmail.com>
 " Last Change:	2012 Sep 04
 " Credits:
@@ -59,7 +59,7 @@ elseif exists("b:current_syntax")
 endif
 
 if !exists("main_syntax")
-  let main_syntax = 'pyxl'
+  let main_syntax = 'pyxl_fasthtml'
 endif
 
 
@@ -276,10 +276,10 @@ endif
 syn sync match pythonSync grouphere NONE "^\s*\%(def\|class\)\s\+\h\w*\s*("
 
 
-" The Pyxl special sauce.
+" The PyxlFasthtml special sauce.
 syn cluster pythonGroup contains=pythonStatement,pythonOperator,pythonConditional,pythonString,pythonEscape,pythonNumber,pythonBuiltin
-syn region pyxlPythonNormal contained start="{\@<=" end="}\@=" contains=@pythonGroup
-syn region pyxlPython start="[^\\]\@<={" end="}" contains=pyxlPythonNormal
+syn region pyxl_fasthtmlPythonNormal contained start="{\@<=" end="}\@=" contains=@pythonGroup
+syn region pyxl_fasthtmlPython start="[^\\]\@<={" end="}" contains=pyxl_fasthtmlPythonNormal
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -302,7 +302,7 @@ syn case ignore
 
 
 " tags
-syn region  htmlString   contained start=+"+ end=+"+ contains=htmlSpecialChar,javaScriptExpression,@htmlPreproc,pyxlPython
+syn region  htmlString   contained start=+"+ end=+"+ contains=htmlSpecialChar,javaScriptExpression,@htmlPreproc,pyxl_fasthtmlPython
 syn region  htmlString   contained start=+'+ end=+'+ contains=htmlSpecialChar,javaScriptExpression,@htmlPreproc
 syn match   htmlValue    contained "=[\t ]*[^'" \t>][^ \t>]*"hs=s+1   contains=javaScriptExpression,@htmlPreproc
 syn region  htmlEndTag             start=+</+      end=+>+ contains=htmlTagN,htmlTagError
@@ -474,7 +474,7 @@ if main_syntax != 'java' || exists("java_css")
   HtmlHiLink htmlStyleArg htmlString
 endif
 
-if main_syntax == "pyxl"
+if main_syntax == "pyxl_fasthtml"
   " synchronizing (does not always work if a comment includes legal
   " html tags, but doing it right would mean to always start
   " at the first line, which is too slow)
@@ -591,15 +591,15 @@ if version >= 508 || !exists("did_python_syn_inits")
     HiLink pythonDoctestValue	Define
   endif
 
-  HiLink pyxlPython Special
-  HiLink pyxlPythonNormal Normal
+  HiLink pyxl_fasthtmlPython Special
+  HiLink pyxl_fasthtmlPythonNormal Normal
 
   delcommand HiLink
 endif
 
-let b:current_syntax = "pyxl"
+let b:current_syntax = "pyxl_fasthtml"
 
-if main_syntax == 'pyxl'
+if main_syntax == 'pyxl_fasthtml'
   unlet main_syntax
 endif
 

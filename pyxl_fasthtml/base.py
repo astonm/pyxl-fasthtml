@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# We want a way to generate non-colliding 'pyxl<num>' ids for elements, so we're
+# We want a way to generate non-colliding 'pyxl_fasthtml<num>' ids for elements, so we're
 # using a non-cryptographically secure random number generator. We want it to be
 # insecure because these aren't being used for anything cryptographic and it's
 # much faster (2x). We're also not using NumPy (which is even faster) because
@@ -8,9 +8,9 @@
 import random
 import sys
 
-from pyxl.utils import escape
+from pyxl_fasthtml.utils import escape
 
-class PyxlException(Exception):
+class PyxlFasthtmlException(Exception):
     pass
 
 class x_base_metaclass(type):
@@ -93,7 +93,7 @@ class x_base(object, metaclass=x_base_metaclass):
     def get_id(self):
         eid = self.attr('id')
         if not eid:
-            eid = 'pyxl%d' % random.randint(0, sys.maxsize)
+            eid = 'pyxl_fasthtml%d' % random.randint(0, sys.maxsize)
             self.set_attr('id', eid)
         return eid
 
@@ -132,14 +132,14 @@ class x_base(object, metaclass=x_base_metaclass):
 
     def __getattr__(self, name):
         if len(name) > 4 and name.startswith('__') and name.endswith('__'):
-            # For dunder name (e.g. __iter__),raise AttributeError, not PyxlException.
+            # For dunder name (e.g. __iter__),raise AttributeError, not PyxlFasthtmlException.
             raise AttributeError(name)
         return self.attr(name.replace('_', '-'))
 
     def attr(self, name, default=None):
         # this check is fairly expensive (~8% of cost)
         if not self.allows_attribute(name):
-            raise PyxlException('<%s> has no attr named "%s"' % (self.__tag__, name))
+            raise PyxlFasthtmlException('<%s> has no attr named "%s"' % (self.__tag__, name))
 
         value = self.__attributes__.get(name)
 
@@ -149,10 +149,10 @@ class x_base(object, metaclass=x_base_metaclass):
         attr_type = self.__attrs__.get(name, str)
         if type(attr_type) == list:
             if not attr_type:
-                raise PyxlException('Invalid attribute definition')
+                raise PyxlFasthtmlException('Invalid attribute definition')
 
             if None in attr_type[1:]:
-                raise PyxlException('None must be the first, default value')
+                raise PyxlFasthtmlException('None must be the first, default value')
 
             return attr_type[0]
 
@@ -166,20 +166,20 @@ class x_base(object, metaclass=x_base_metaclass):
     def set_attr(self, name, value):
         # this check is fairly expensive (~8% of cost)
         if not self.allows_attribute(name):
-            raise PyxlException('<%s> has no attr named "%s"' % (self.__tag__, name))
+            raise PyxlFasthtmlException('<%s> has no attr named "%s"' % (self.__tag__, name))
 
         if value is not None:
             attr_type = self.__attrs__.get(name, str)
 
             if type(attr_type) == list:
-                # support for enum values in pyxl attributes
+                # support for enum values in pyxl_fasthtml attributes
                 values_enum = attr_type
                 assert values_enum, 'Invalid attribute definition'
 
                 if value not in values_enum:
                     msg = '%s: %s: incorrect value "%s" for "%s". Expecting enum value %s' % (
                         self.__tag__, self.__class__.__name__, value, name, values_enum)
-                    raise PyxlException(msg)
+                    raise PyxlFasthtmlException(msg)
 
             else:
                 try:
@@ -189,7 +189,7 @@ class x_base(object, metaclass=x_base_metaclass):
                     exc_type, exc_obj, exc_tb = sys.exc_info()
                     msg = '%s: %s: incorrect type for "%s". expected %s, got %s' % (
                         self.__tag__, self.__class__.__name__, name, attr_type, type(value))
-                    exception = PyxlException(msg)
+                    exception = PyxlFasthtmlException(msg)
                     raise exception.with_traceback(exc_tb)
 
             self.__attributes__[name] = value

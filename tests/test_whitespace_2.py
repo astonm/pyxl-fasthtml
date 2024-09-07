@@ -1,5 +1,5 @@
-# coding: pyxl
-from pyxl import html
+# coding: pyxl_fasthtml
+from pyxl_fasthtml import html
 def test():
     assert str(<div>
                    The owner has not granted you access to this file.

@@ -12,8 +12,8 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-from pyxl.base import x_base
-from pyxl.utils import escape
+from pyxl_fasthtml.base import x_base
+from pyxl_fasthtml.utils import escape
 
 class x_cond_comment(x_base):
     __attrs__ = {

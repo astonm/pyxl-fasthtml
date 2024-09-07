@@ -1,9 +1,9 @@
-# coding: pyxl
+# coding: pyxl_fasthtml
 import datetime
 
 from unittest import TestCase
-from pyxl import html
-from pyxl import rss
+from pyxl_fasthtml import html
+from pyxl_fasthtml import rss
 
 class RssTests(TestCase):
     def test_decl(self):

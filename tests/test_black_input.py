@@ -1,4 +1,4 @@
-# coding: pyxl
+# coding: pyxl_fasthtml
 
 import html
 class A:
@@ -68,7 +68,7 @@ class A:
 
 class B:
     def foo():
-        text = (<t fill="{dict(lol_name=self.lol.name, something=0000000000000000000000, testing='i hate pyxl')}">
+        text = (<t fill="{dict(lol_name=self.lol.name, something=0000000000000000000000, testing='i hate pyxl_fasthtml')}">
         </t>)
 
         return (<div class="something">

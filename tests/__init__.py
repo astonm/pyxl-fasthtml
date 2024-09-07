@@ -1,1 +1,1 @@
-import pyxl.codec.register
+import pyxl_fasthtml.codec.register

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from pyxl.base import x_base
+from pyxl_fasthtml.base import x_base
 
 class x_element(x_base):
 

@@ -1,9 +1,9 @@
-# coding: pyxl
+# coding: pyxl_fasthtml
 import unittest
-from pyxl import html
-from pyxl.base import PyxlException, x_base
+from pyxl_fasthtml import html
+from pyxl_fasthtml.base import PyxlFasthtmlException, x_base
 
-class PyxlTests(unittest.TestCase):
+class PyxlFasthtmlTests(unittest.TestCase):
 
     def test_basics(self):
         self.assertEqual(<div />.to_string(), '<div></div>')
@@ -17,7 +17,7 @@ class PyxlTests(unittest.TestCase):
         self.assertEqual(<div>{html.rawhtml('&')}</div>.to_string(), '<div>&</div>')
 
     def test_comments(self):
-        pyxl = (
+        pyxl_fasthtml = (
             <div
                 class="blah" # attr comment
                 >  # comment1
@@ -25,7 +25,7 @@ class PyxlTests(unittest.TestCase):
                 text# comment3
                 # comment4
             </div>)
-        self.assertEqual(pyxl.to_string(), '<div class="blah">text</div>')
+        self.assertEqual(pyxl_fasthtml.to_string(), '<div class="blah">text</div>')
 
     def test_cond_comment(self):
         s = 'blahblah'
@@ -137,7 +137,7 @@ class PyxlTests(unittest.TestCase):
         self.assertEqual(<foo />.value, 'a')
         self.assertEqual(<foo value="b" />.attr('value'), 'b')
         self.assertEqual(<foo value="b" />.value, 'b')
-        with self.assertRaises(PyxlException):
+        with self.assertRaises(PyxlFasthtmlException):
             <foo value="c" />
 
         class x_bar(x_base):
@@ -148,10 +148,10 @@ class PyxlTests(unittest.TestCase):
             def _to_list(self, l):
                 pass
 
-        with self.assertRaises(PyxlException):
+        with self.assertRaises(PyxlFasthtmlException):
             <bar />.attr('value')
 
-        with self.assertRaises(PyxlException):
+        with self.assertRaises(PyxlFasthtmlException):
             <bar />.value
 
         class x_baz(x_base):

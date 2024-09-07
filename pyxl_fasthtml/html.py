@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 
-from pyxl.utils import escape
-from pyxl.base import x_base
+from pyxl_fasthtml.utils import escape
+from pyxl_fasthtml.base import x_base
 
 # for backwards compatibility.
-from pyxl.browser_hacks import x_cond_comment
+from pyxl_fasthtml.browser_hacks import x_cond_comment
 
 class x_html_element(x_base):
     def _to_list(self, l):

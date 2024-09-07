@@ -1,11 +1,11 @@
-" Pyxl indent file
+" PyxlFasthtml indent file
 "
 " This file is the unholy spawn of a python indent file from the vim script
 " database and the standard, html, and xml indent files.
 "
 " BUG: atrociously slow; takes about four seconds to reindent 200 lines.
 "
-" Language:		Pyxl
+" Language:		PyxlFasthtml
 " Maintainer:		Josiah Boning <jboning@gmail.com>
 " Last Change:		2012 Sep 16
 " Credits:
@@ -24,7 +24,7 @@ let b:did_indent = 1
 setlocal expandtab
 setlocal nolisp
 setlocal autoindent
-setlocal indentexpr=GetPyxlIndent(v:lnum)
+setlocal indentexpr=GetPyxlFasthtmlIndent(v:lnum)
 setlocal indentkeys=!^F,o,O,<:>,0),0],0},=elif,=except,<>>,<<>,/,{,},*<Return>
 
 let s:maxoff = 50
@@ -228,7 +228,7 @@ fun! <SID>GetMarkupIndent(lnum)
     endif
 endfun
 
-function! GetPyxlIndent(lnum)
+function! GetPyxlFasthtmlIndent(lnum)
 
     " First line has indent 0
     if a:lnum == 1
@@ -358,4 +358,4 @@ let &cpo = s:cpo_save
 unlet s:cpo_save
 
 " for debugging
-"map yy :echo GetPyxlIndent(line('.'))<ENTER>
+"map yy :echo GetPyxlFasthtmlIndent(line('.'))<ENTER>

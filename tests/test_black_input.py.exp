@@ -1,4 +1,4 @@
-# coding: pyxl
+# coding: pyxl_fasthtml
 
 import html
 
@@ -106,7 +106,7 @@ class B:
                          dict(
                              lol_name=self.lol.name,
                              something=0000000000000000000000,
-                             testing="i hate pyxl",
+                             testing="i hate pyxl_fasthtml",
                          )
                      }">
             </t>

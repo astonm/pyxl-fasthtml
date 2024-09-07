@@ -1,11 +1,11 @@
-# Test that black commutes with the pyxl encoder.
+# Test that black commutes with the pyxl_fasthtml encoder.
 # This test is pretty fragile since it uses black internals
 # It was tested on black 19.3b0.
 
 import os
 import pytest
 
-from pyxl.codec.transform import pyxl_transform_string, pyxl_invert_string
+from pyxl_fasthtml.codec.transform import pyxl_fasthtml_transform_string, pyxl_fasthtml_invert_string
 
 dir_path = os.path.dirname(os.path.abspath(__file__))
 
@@ -15,8 +15,8 @@ def _run_black(contents):
     # Run black on the file. We manually encode and decode ourselves
     # to avoid needing to make black find the right codec.
     mode = black.FileMode()
-    return pyxl_invert_string(
-        black.format_str(pyxl_transform_string(contents, invertible=True), mode=mode)
+    return pyxl_fasthtml_invert_string(
+        black.format_str(pyxl_fasthtml_transform_string(contents, invertible=True), mode=mode)
     )
 
 def _black_roundtrip(path):
@@ -32,10 +32,10 @@ def _black_roundtrip(path):
         "Black not idempotent on file %s" % path)
 
     # Now we decode both versions with the traditional codec and compare.
-    orig_pyxl = pyxl_transform_string(contents, invertible=False)
-    new_pyxl = pyxl_transform_string(output, invertible=False)
+    orig_pyxl_fasthtml = pyxl_fasthtml_transform_string(contents, invertible=False)
+    new_pyxl_fasthtml = pyxl_fasthtml_transform_string(output, invertible=False)
 
-    black.assert_equivalent(orig_pyxl, new_pyxl)
+    black.assert_equivalent(orig_pyxl_fasthtml, new_pyxl_fasthtml)
 
 # TODO: it would be better if each file was automatically a separate test case...
 def test_black_commute():

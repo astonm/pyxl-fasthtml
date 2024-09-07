@@ -6,14 +6,16 @@ import sys
 version = "1.4"
 
 distutils.core.setup(
-    name="pyxl3",
+    name="pyxl-fasthtml",
     version=version,
-    packages = ["pyxl", "pyxl.codec", "pyxl.scripts"],
-    url="http://github.com/gvanrossum/pyxl3",
+    packages=[
+        "pyxl_fasthtml",
+        "pyxl_fasthtml.codec",
+        "pyxl_fasthtml.scripts",
+    ],
+    url="http://github.com/astonm/pyxl-fasthtml",
     license="http://www.apache.org/licenses/LICENSE-2.0",
     description="""
-        This is a Python 3 port of the original pyxl package.
-        It is used to support the original pyxl version
-        (still in use at Dropbox) in mypy (which is Python 3).
-    """
+        A Python 3 extension for writing structured and reusable inline HTML for FastHTML projects
+    """,
 )

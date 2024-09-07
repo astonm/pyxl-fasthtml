@@ -41,22 +41,22 @@ class A:
                          "whatever": whatever,}} world
              </testing>)
 
-        indented_annoyingly = <frag>
+        indented_annoyingly = <div>
             this is very popular...
-        </frag>
+        </div>
 
-        a = <frag>Im cool # lol
-</frag>
-        bc = <frag>
+        a = <div>Im cool # lol
+</div>
+        bc = <div>
             {
                 0 #lol
             }
             {{"aaaaaaaaaaaaaaaa": aaaaaaaaaaaaaaaa,
               "bbbbbbbbbbbbbbbb": lurrrr,
               "whatever": whatever,}}
-        </frag>
-        c = <frag>{0#lol
-}</frag>
+        </div>
+        c = <div>{0#lol
+}</div>
 
         placeholder_html = <div id={element_id} />.to_string()
 

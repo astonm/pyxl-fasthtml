@@ -1,6 +1,6 @@
 # coding: pyxl_fasthtml
 
-from pyxl_fasthtml import html
+from fasthtml.common import *
 
 # Only testing that this produces valid code
 def f(self):

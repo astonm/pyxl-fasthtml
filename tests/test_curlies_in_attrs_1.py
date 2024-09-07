@@ -1,5 +1,5 @@
 # coding: pyxl_fasthtml
-from pyxl_fasthtml import html
+from fasthtml.common import *
 def test():
     # kannan thinks this should be different
-    assert str(<frag><img src="{'foo'}" /></frag>) == """<img src="foo" />"""
+    assert to_xml(<img src="{'foo'}" />) == """<img src="foo">\n"""

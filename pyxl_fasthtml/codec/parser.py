@@ -172,10 +172,8 @@ class PyxlFasthtmlParser(HTMLTokenizer):
     @staticmethod
     def safe_attr_name(name):
         if name == "class":
-            return "xclass"
-        if name == "for":
-            return "xfor"
-        return name.replace("-", "_").replace(":", "COLON")
+            return "cls"
+        return name
 
     def _handle_attr_value(self, attr_value):
         def format_parts():
@@ -232,7 +230,7 @@ class PyxlFasthtmlParser(HTMLTokenizer):
         data = data.replace("\n", " ")
         return data
 
-    def handle_starttag(self, tag, attrs, call=True):
+    def handle_starttag(self, tag, attrs):
         self.start_element()
         self.open_tags.append(
             {"tag": tag, "row": self.end[0], "attrs": attrs, "children": 0}
@@ -243,15 +241,9 @@ class PyxlFasthtmlParser(HTMLTokenizer):
         x_tag = module + dot + identifier
 
         self.output.append("%s(" % x_tag)
-
-        # XXX TODO XXX REMOVE???
-        # self.output.append(")")
-        # if call:
-        #     # start call to __call__
-        #     self.output.append(",")
         self.last_thing_was_python = False
 
-    def handle_endtag(self, tag_name, call=True):
+    def handle_endtag(self, tag_name):
 
         assert self.open_tags, (
             "got </%s> but tag stack empty; parsing should be over!" % tag_name
@@ -275,17 +267,15 @@ class PyxlFasthtmlParser(HTMLTokenizer):
             self.output.append("=")
             self._handle_attr_value(attr_value)
 
-        if call:
-            # finish call to __call__
-            self.output.append(")")
+        self.output.append(")")
 
         if len(self.open_tags):
             self.output.append(",")
         self.last_thing_was_python = False
 
     def handle_startendtag(self, tag_name, attrs):
-        self.handle_starttag(tag_name, attrs, call=False)
-        self.handle_endtag(tag_name, call=False)
+        self.handle_starttag(tag_name, attrs)
+        self.handle_endtag(tag_name)
 
     def handle_data(self, data):
         data = self._normalize_data_whitespace(
@@ -295,16 +285,7 @@ class PyxlFasthtmlParser(HTMLTokenizer):
             return
 
         self.start_element()
-
-        # XXX XXX mimics old pyxl, but this is gross and likely wrong. I'm pretty sure we actually
-        # want %r instead of this crazy quote substitution and u"%s".
-        # TODO 9/7/2024 does this make sense at all now?
-        data = data.replace('"', '\\"')
-        if data != escape(data):
-            self.output.append('html.rawhtml(u"%s"), ' % data)
-        else:
-            self.output.append('u"%s", ' % data)
-
+        self.output.append(repr(data) + ", ")
         self.last_thing_was_python = False
 
     def handle_comment(self, data):

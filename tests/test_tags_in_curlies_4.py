@@ -1,4 +1,4 @@
 # coding: pyxl_fasthtml
-from pyxl_fasthtml import html
+from fasthtml.common import *
 def test():
-    assert str(<frag>{'<div class="foo"> foobar </div>'}</frag>) == """&lt;div class=&quot;foo&quot;&gt; foobar &lt;/div&gt;"""
+    assert to_xml(<div>{'<div class="foo"> foobar </div>'}</div>) == """<div>&lt;div class=&quot;foo&quot;&gt; foobar &lt;/div&gt;</div>\n"""

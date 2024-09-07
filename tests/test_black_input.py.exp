@@ -66,17 +66,17 @@ class A:
         )
 
         indented_annoyingly = (
-            <frag>
+            <div>
                 this is very popular...
-            </frag>
+            </div>
         )
 
         a = (
-            <frag>Im cool # lol
-</frag>
+            <div>Im cool # lol
+</div>
         )
         bc = (
-            <frag>
+            <div>
                 {0}
                 # lol
                 {
@@ -86,9 +86,9 @@ class A:
                         "whatever": whatever,
                     }
                 }
-            </frag>
+            </div>
         )
-        c = <frag>{0}</frag>  # lol
+        c = <div>{0}</div>  # lol
 
         placeholder_html = <div id={element_id} />.to_string()
 

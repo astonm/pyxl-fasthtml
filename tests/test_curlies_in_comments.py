@@ -1,6 +1,6 @@
 # coding: pyxl_fasthtml
-from pyxl_fasthtml import html
+from fasthtml.common import *
 def test():
-    <frag>
+    <div>
         # test{}
-    </frag>
+    </div>

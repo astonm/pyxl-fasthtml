@@ -5,10 +5,7 @@ import unittest
 
 from fasthtml.common import *
 
-from pyxl_fasthtml import html
 from pyxl_fasthtml.base import PyxlFasthtmlException, x_base
-
-def Frag(*x): return x
 
 class PyxlFasthtmlTests(unittest.TestCase):
     def assertEqualHTML(self, elm, s):
@@ -20,11 +17,11 @@ class PyxlFasthtmlTests(unittest.TestCase):
         self.assertEqualHTML(<img src="blah" />, '<img src="blah">')
         self.assertEqualHTML(<div cls="c"></div>, '<div class="c"></div>')
         self.assertEqualHTML(<div><span></span></div>, '<div><span></span></div>')
-        self.assertEqualHTML(<frag><span /><span /></frag>, '<span></span><span></span>')
+        self.assertEqualHTML(<div><span /><span /></div>, '<div><span></span><span></span></div>')
 
     def test_escaping(self):
         self.assertEqualHTML(<div cls="&">{'&'}</div>, '<div class="&amp;">&amp;</div>')
-        self.assertEqualHTML(<div>{html.rawhtml('&')}</div>, '<div>&</div>')
+        self.assertEqualHTML(<div>{NotStr('&')}</div>, '<div>&</div>')
 
     def test_multiline(self):
         div = (

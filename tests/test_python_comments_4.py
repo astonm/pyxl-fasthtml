@@ -1,10 +1,10 @@
 # coding: pyxl_fasthtml
-from pyxl_fasthtml import html
+from fasthtml.common import *
 
 
 def test():
     assert (
-        str(
+        to_xml(
             (
                 <div>
                 {
@@ -14,5 +14,5 @@ def test():
                 </div>
             )
         )
-        == "<div>0</div>"
+        == "<div>0</div>\n"
     )

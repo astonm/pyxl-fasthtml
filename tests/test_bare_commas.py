@@ -1,12 +1,12 @@
 # coding: pyxl_fasthtml
-from pyxl_fasthtml import html
+from fasthtml.common import *
 
 def test():
     title = "hi"
     x, y, z = 1, 2, 3
-    assert str(
+    assert to_xml(
         <div>
             {title}
             {x, y, z}
         </div>
-    ) == "<div>hi 123</div>"
+    ) == "<div>\nhi\n \n1\n2\n3\n</div>\n"

@@ -1,5 +1,5 @@
 # coding: pyxl_fasthtml
-from pyxl_fasthtml import html
+from fasthtml.common import *
 
 # This weird circumstance could cause extra spaces to get inserted...
 def a():
@@ -14,5 +14,5 @@ def b():
             </div>)
 
 def test():
-    assert str(a()) == "<div>some stuff $'#'</div>"
-    assert str(b()) == "<div>some stuff $'#'</div>"
+    assert to_xml(a()) == "<div>\nsome stuff $&#x27;\n#\n&#x27;\n</div>\n"
+    assert to_xml(b()) == "<div>\nsome stuff $&#x27;\n#\n&#x27;\n</div>\n"

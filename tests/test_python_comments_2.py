@@ -1,4 +1,4 @@
 # coding: pyxl_fasthtml
-from pyxl_fasthtml import html
+from fasthtml.common import *
 def test():
-    assert str(<div style="background-color: #1f75cc;"></div>) == """<div style="background-color: #1f75cc;"></div>"""
+    assert to_xml(<div style="background-color: #1f75cc;"></div>) == """<div style="background-color: #1f75cc;"></div>\n"""

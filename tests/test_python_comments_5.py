@@ -1,6 +1,6 @@
 # coding: pyxl_fasthtml
-from pyxl_fasthtml import html
+from fasthtml.common import *
 def test():
     if True:
-        b = <frag>{0#lol
-}</frag>
+        b = <div>{0#lol
+}</div>

@@ -1,5 +1,5 @@
 # coding: pyxl_fasthtml
-from pyxl_fasthtml import html
+from fasthtml.common import *
 def test():
-    assert str(<div #style="display: none;"
-               ></div>) == "<div></div>"
+    assert to_xml(<div #style="display: none;"
+               ></div>) == "<div></div>\n"

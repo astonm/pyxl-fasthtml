@@ -1,5 +1,5 @@
 # coding: pyxl_fasthtml
 
-from pyxl_fasthtml import html
+from fasthtml.common import *
 
-print(<html><body>Hello World!</body></html>)
+print(to_xml(<html><body>Hello World!</body></html>))

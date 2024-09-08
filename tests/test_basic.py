@@ -5,8 +5,6 @@ import unittest
 
 from fasthtml.common import *
 
-from pyxl_fasthtml.base import PyxlFasthtmlException, x_base
-
 class PyxlFasthtmlTests(unittest.TestCase):
     def assertEqualHTML(self, elm, s):
         elm_s = re.sub(r"\n\s*", "", to_xml(elm))

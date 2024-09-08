@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import tokenize
-from pyxl_fasthtml.utils import escape
 from .html_tokenizer import (
     HTMLTokenizer,
     ParseError as TokenizerParseError,

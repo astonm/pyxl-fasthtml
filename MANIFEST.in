@@ -1,2 +1,3 @@
 include README.md pyxl_fasthtml.pth finish_install.py
 recursive-include emacs *.el
+recursive-include vim *.vim

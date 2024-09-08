@@ -1,6 +1,6 @@
 # pyxl-fasthtml
 
-This is a [fork](https://github.com/astonm/pyxl-fasthtml) of a [fork](https://github.com/gvanrossum/pyxl3) (unmaintained) of [Pyxl](https://github.com/dropbox/pyxl) (unmaintained), an early implementation of the pattern made popular now by React, allowing the use of HTML-like markup inside of a Python file. pyxl-fasthtml was itself inspired by the [XHP](https://github.com/facebook/xhp/wiki) project at Facebook.
+This is a [fork](https://github.com/astonm/pyxl-fasthtml) of a [port](https://github.com/gvanrossum/pyxl3) of a [fork](https://github.com/dropbox/pyxl) of [Pyxl](https://github.com/awable/pyxl), an early implementation of the pattern made popular now by React, allowing the use of HTML-like markup inside of a Python file. Pyxl was itself inspired by the [XHP](https://github.com/facebook/xhp/wiki) project at Facebook.
 
 With the appearance of [FastHTML](https://docs.fastht.ml/) there's a newfound reason to want this sort of capability. The built-in component library
 is a powerful abstraction for generating HTML, but nothing quite matches the real thing. Rather than writing
@@ -137,3 +137,11 @@ See [pycharm-pyxl](https://github.com/christoffer/pycharm-pyxl).
 ### Sublime Text (untested)
 
 See [sublime-pyxl](https://github.com/yyjhao/sublime-pyxl).
+
+## Related Projects
+
+- [pyxl](https://github.com/awable/pyxl) (Cove): The original Pyxl implementation, for Python 2 (unmaintained)
+- [pyxl](https://github.com/dropbox/pyxl) (Dropbox): An updated version of Pyxl used at Dropbox, for Python 2 (unmaintained)
+- [pyxl3](https://github.com/gvanrossum/pyxl3): A Python 3 port of Pyxl used at Dropbox (unmaintained)
+- [pyxl4](https://github.com/pyxl4/pyxl4): A fork of `pyxl3` that supports both Python 2 and 3, and also is hosted on PyPI for easy installation
+- [mixt](https://github.com/twidi/mixt/): A fork of `pyxl3` that uses Python 3 type annotations for validation and supports various React-like features
